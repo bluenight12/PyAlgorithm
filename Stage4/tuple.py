@@ -2,8 +2,18 @@
 # https://school.programmers.co.kr/learn/courses/30/lessons/64065
 
 def solution(s):
+    # dictionary 에 가장 많이 들어간 값(제일 처음으로 들어간 값) 을 기준으로 내림차순 정렬하면 tuple이 나온 순서대로 return 가능
     answer = {}
+    data = s[2:-2].split('},{')
+    for i in data:
+        i = i.split(',')
+        for val in i:
+            val = int(val)
+            answer[val] = 1 if val not in answer else answer[val] + 1
+    answer = dict(sorted(answer.items(), key = lambda x : x[1], reverse= True))
+    return list(answer)
 
+    '''
     data = s[2:-2].split('},{')
     
     # 글자 개수로 sorted
@@ -22,6 +32,7 @@ def solution(s):
     # 양옆 중괄호를 2개씩 삭제한뒤에 },{를 삭제하면 숫자만 남음
     # list의 탐색 시간은 n 이므로 O(n^2) 급이 되어버림
     # dictionary의 탐색 시간은 1이고 넣어야 할 키는 하나기 때문에 괜찮음
+    '''
     '''
     data = s[2:-2].split('},{')
     
@@ -71,4 +82,4 @@ def solution(s):
     # return result
 
 s = "{{1,2,3},{2,1},{1,2,4,3},{2}}"
-print(solution(s))
+solution(s)
